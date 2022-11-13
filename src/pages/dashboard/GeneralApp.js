@@ -9,9 +9,9 @@ const GeneralApp = () => {
 
   return (
     <>
-      <Suspense fallback="Loading..." >
+      {/* <Suspense fallback="Loading..." >
         <Cat />
-      </Suspense>
+      </Suspense> */}
     </>
   );
 };
