@@ -1,4 +1,5 @@
-import { Box, IconButton, Stack, useTheme } from "@mui/material";
+import { Box, Divider, IconButton, Stack, useTheme } from "@mui/material";
+import { Gear } from "phosphor-react";
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Logo from '../../assets/Images/logo.ico';
@@ -16,7 +17,7 @@ const DashboardLayout = () => {
         height: '100vh',
         width: 100
       }}>
-        <Stack direction={'column'} alignItems={"center"} sx={{ width: "100%" }}>
+        <Stack direction={'column'} alignItems={"center"} sx={{ width: "100%" }} spacing={3}>
           <Box sx={{
             backgroundColor: theme.palette.primary.main,
             height: 64,
@@ -25,14 +26,20 @@ const DashboardLayout = () => {
           }}>
             <img src={Logo} alt="Let's Chat App Logo" />
           </Box>
-          {
-            Nav_Buttons.map((el) =>
-              <IconButton
-                key={el.index}
-              >
-                {el.icon}
-              </IconButton>)
-          }
+          <Stack spacing={3}>
+            {
+              Nav_Buttons.map((el) =>
+                <IconButton
+                  key={el.index}
+                >
+                  {el.icon}
+                </IconButton>)
+            }
+            <Divider />
+            <IconButton>
+              <Gear />
+            </IconButton>
+          </Stack>
         </Stack>
       </Box>
       <Outlet />
