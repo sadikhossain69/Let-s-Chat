@@ -45,15 +45,28 @@ const DashboardLayout = () => {
                     setSelected(el.index)
                   }}
                   key={el.index}
-                  sx={{ width: "max-content", color: '#000'}}
+                  sx={{ width: "max-content", color: '#000' }}
                 >
                   {el.icon}
                 </IconButton>
             ))}
-            <Divider />
-            <IconButton>
-              <Gear />
-            </IconButton>
+            <Divider sx={{ width: "45px" }} />
+            {
+              selected === 3 ?
+                <Box sx={{ backgroundColor: theme.palette.primary.main, borderRadius: 1.5 }}>
+                  <IconButton
+                    sx={{ width: "max-content", color: "#fff" }}
+                  >
+                    <Gear />
+                  </IconButton>
+                </Box>
+                :
+                <IconButton onClick={() => {
+                  setSelected(3)
+                }} >
+                  <Gear />
+                </IconButton>
+            }
           </Stack>
         </Stack>
       </Box>
