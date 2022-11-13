@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Logo from '../../assets/Images/logo.ico';
 import { Nav_Buttons } from "../../data";
+import useSettings from "../../hooks/useSettings";
 
 const AntSwitch = styled(Switch)(({ theme }) => ({
   width: 40,
@@ -53,6 +54,7 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 const DashboardLayout = () => {
 
   const [selected, setSelected] = useState(0)
+  const { onToggleMode } = useSettings()
   const theme = useTheme()
 
   return (
@@ -93,7 +95,7 @@ const DashboardLayout = () => {
                       setSelected(el.index)
                     }}
                     key={el.index}
-                    sx={{ width: "max-content", color: '#000' }}
+                    sx={{ width: "max-content", color: theme.palette.mode === "light" ? "#000" : theme.palette.text.primary }}
                   >
                     {el.icon}
                   </IconButton>
@@ -120,7 +122,9 @@ const DashboardLayout = () => {
           </Stack>
 
           <Stack spacing={2}>
-            <AntSwitch defaultChecked />
+            <AntSwitch defaultChecked onClick={() => {
+              onToggleMode()
+            }} />
             <Avatar src={faker.image.avatar()} />
           </Stack>
         </Stack>
