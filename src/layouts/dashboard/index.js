@@ -1,12 +1,14 @@
 import { Box, Divider, IconButton, Stack, useTheme } from "@mui/material";
 import { Gear } from "phosphor-react";
 import React from "react";
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Logo from '../../assets/Images/logo.ico';
 import { Nav_Buttons } from "../../data";
 
 const DashboardLayout = () => {
 
+  const [selected, setSelected] = useState(0)
   const theme = useTheme()
 
   return (
@@ -26,15 +28,28 @@ const DashboardLayout = () => {
           }}>
             <img src={Logo} alt="Let's Chat App Logo" />
           </Box>
-          <Stack spacing={3}>
-            {
-              Nav_Buttons.map((el) =>
+          <Stack spacing={3} sx={{ width: "max-content" }} direction="column" alignItems={'center'}>
+            {Nav_Buttons.map((el) => (
+              el.index === selected ?
+                <Box sx={{ backgroundColor: theme.palette.primary.main, borderRadius: 1.5 }}>
+                  <IconButton
+                    key={el.index}
+                    sx={{ width: "max-content", color: "#fff" }}
+                  >
+                    {el.icon}
+                  </IconButton>
+                </Box>
+                :
                 <IconButton
+                  onClick={() => {
+                    setSelected(el.index)
+                  }}
                   key={el.index}
+                  sx={{ width: "max-content", color: '#000'}}
                 >
                   {el.icon}
-                </IconButton>)
-            }
+                </IconButton>
+            ))}
             <Divider />
             <IconButton>
               <Gear />
